@@ -1,15 +1,41 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th ="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 
 <head>
 	<meta charset="UTF-8">
-	<title>The game designer Chintu</title>
+	<title>The game developer Chintu</title>
+
+	<script th:inline="javascript">
+
+		window.onload = function checkIfGameOver() {
+
+			var numberOfTriesRemaining = [[${triesLeft}]];
+
+			if (numberOfTriesRemaining === 0) {
+				alert("GAME OVER");
+				document.getElementById('guessedChar').disabled = true;
+				document.getElementById('TRY').disabled = true;
+			}
+		}
+
+	</script>
+
 </head>
 
 <body>
 	<h1 align="center">Guess The Word</h1>
-	<h2 align="center" th:text = "${wordToDisplay}">show a random word here</h2>
+	<h2 align="center" th:text="${wordToDisplay}">show a random word here</h2>
+	<h2 align="right" th:text="'Tries Remaining : '+ ${	triesLeft}">No of Tries Left</h2>
 	<hr />
+
+	<div align="center">
+		<form action="homepage" method="GET">
+			<label>Guess a Char : </label>
+			<input type="text" name="guessedChar" />
+			<input type="submit" value="TRY">
+		</form>
+	</div>
+
 </body>
 
 </html>
